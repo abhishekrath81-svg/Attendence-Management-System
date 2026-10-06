@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Attendance Management System</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="topbar">
+        <div>
+          <p class="eyebrow">Student Attendance</p>
+          <h1>Attendance Management System</h1>
+        </div>
+        <div class="top-actions">
+          <label>
+            Select date
+            <input id="attendanceDate" type="date" />
+          </label>
+          <button id="addClassDay" class="ghost-button" type="button">Add class day</button>
+        </div>
+      </section>
+
+      <section class="summary-grid" aria-label="Attendance summary">
+        <article class="summary-card accent-green">
+          <span>Total students</span>
+          <strong id="totalStudents">0</strong>
+        </article>
+        <article class="summary-card accent-blue">
+          <span>Total class days</span>
+          <strong id="totalClasses">0</strong>
+        </article>
+        <article class="summary-card accent-coral">
+          <span>Selected day rate</span>
+          <strong id="selectedRate">0%</strong>
+        </article>
+        <article class="summary-card accent-gold">
+          <span>Average attendance</span>
+          <strong id="averageRate">0%</strong>
+        </article>
+      </section>
+
+      <section class="layout">
+        <aside class="panel add-panel">
+          <div class="panel-heading">
+            <h2>Add Student</h2>
+            <p>Saved inside <strong>data/students.json</strong></p>
+          </div>
+          <form id="studentForm" class="student-form">
+            <label>
+              Roll number
+              <input name="roll" placeholder="06" required />
+            </label>
+            <label>
+              Student name
+              <input name="name" placeholder="Student full name" required />
+            </label>
+            <label>
+              Class
+              <input name="className" placeholder="10th A" />
+            </label>
+            <label>
+              Guardian
+              <input name="guardian" placeholder="Guardian name" />
+            </label>
+            <button class="primary-button" type="submit">Add student</button>
+          </form>
+        </aside>
+
+        <section class="main-stack">
+          <section class="panel register-panel">
+            <div class="register-toolbar">
+              <div>
+                <h2>Daily Attendance</h2>
+                <p id="registerSubtext">Loading attendance...</p>
+              </div>
+              <div class="toolbar-actions">
+                <input id="searchInput" type="search" placeholder="Search student" />
+                <button id="markAllPresent" class="ghost-button" type="button">Mark visible present</button>
+                <button id="saveAttendance" class="primary-button" type="button">Save attendance</button>
+              </div>
+            </div>
+
+            <div class="status-key">
+              <span><i class="dot present"></i>Present</span>
+              <span><i class="dot absent"></i>Absent</span>
+              <span><i class="dot late"></i>Late</span>
+              <span><i class="dot excused"></i>Excused</span>
+            </div>
+
+            <div id="studentList" class="student-list" aria-live="polite"></div>
+            <div id="emptyState" class="empty-state" hidden>
+              <h3>No students found</h3>
+              <p>Add a student or clear the search box.</p>
+            </div>
+          </section>
+
+          <section class="insight-grid">
+            <section class="panel calendar-panel">
+              <div class="panel-heading split-heading">
+                <div>
+                  <h2>Class Calendar</h2>
+                  <p>Class days and attendance count</p>
+                </div>
+                <div class="month-actions">
+                  <button id="prevMonth" class="icon-button" type="button" aria-label="Previous month">‹</button>
+                  <strong id="calendarTitle"></strong>
+                  <button id="nextMonth" class="icon-button" type="button" aria-label="Next month">›</button>
+                </div>
+              </div>
+              <div class="calendar-weekdays">
+                <span>Sun</span>
+                <span>Mon</span>
+                <span>Tue</span>
+                <span>Wed</span>
+                <span>Thu</span>
+                <span>Fri</span>
+                <span>Sat</span>
+              </div>
+              <div id="calendarGrid" class="calendar-grid"></div>
+            </section>
+
+            <section class="panel performance-panel">
+              <div class="panel-heading">
+                <h2>Student Performance</h2>
+                <p>Attended days and total percentage</p>
+              </div>
+              <div id="performanceList" class="performance-list"></div>
+            </section>
+          </section>
+        </section>
+      </section>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
